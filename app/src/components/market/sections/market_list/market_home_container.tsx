@@ -110,7 +110,8 @@ const wrangleResponse = (data: GraphMarketMakerDataItem[], networkId: number): M
     }
   })
 }
-
+// eslint-disable-next-line
+debugger
 const MarketHomeContainer: React.FC = () => {
   const context = useConnectedWeb3Context()
   const cpk = useConnectedCPKContext()
@@ -232,7 +233,6 @@ const MarketHomeContainer: React.FC = () => {
 
   const [markets, setMarkets] = useState<RemoteData<MarketMakerDataItem[]>>(RemoteData.notAsked())
   const [categories, setCategories] = useState<RemoteData<CategoryDataItem[]>>(RemoteData.notAsked())
-
   const defaultCpkAddress = context.relay ? context.account : null
   const [cpkAddress, setCpkAddress] = useState<Maybe<string>>(defaultCpkAddress)
 

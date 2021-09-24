@@ -61,6 +61,7 @@ export const GRAPH_SOKOL_HTTP = 'https://api.thegraph.com/subgraphs/name/protofi
 export const GRAPH_SOKOL_WS = 'wss://api.thegraph.com/subgraphs/name/protofire/omen-sokol'
 export const GRAPH_XDAI_HTTP = 'https://api.thegraph.com/subgraphs/name/protofire/omen-xdai'
 export const GRAPH_XDAI_WS = 'wss://api.thegraph.com/subgraphs/name/protofire/omen-xdai'
+export const GRAPH_CHAPEL_HTTP = 'https://api.thegraph.com/subgraphs/name/sin-bufan/omen-bsct'
 
 export const KLEROS_CURATE_GRAPH_MAINNET_HTTP = 'https://api.thegraph.com/subgraphs/name/kleros/curate'
 export const KLEROS_CURATE_GRAPH_MAINNET_WS = 'wss://api.thegraph.com/subgraphs/name/kleros/curate'

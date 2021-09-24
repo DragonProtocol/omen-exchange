@@ -24,13 +24,14 @@ import { getImageUrl } from './token'
 import { waitABit } from './tools'
 import { Arbitrator, Token } from './types'
 
-export type NetworkId = 1 | 4 | 77 | 100
+export type NetworkId = 1 | 4 | 77 | 100 | 97
 
 export const networkIds = {
   MAINNET: 1,
   RINKEBY: 4,
   SOKOL: 77,
   XDAI: 100,
+  chapel: 97,
 } as const
 
 export const networkNames = {
@@ -38,6 +39,7 @@ export const networkNames = {
   4: 'RINKEBY',
   77: 'SOKOL',
   100: 'XDAI',
+  97: 'chapel',
 } as const
 
 type CPKAddresses = {
@@ -284,6 +286,56 @@ const networks: { [K in NetworkId]: Network } = {
     blockExplorer: 'blockscout',
     blockExplorerURL: 'https://blockscout.com/poa/xdai',
   },
+  [networkIds.chapel]: {
+    label: 'chapel',
+    url: 'https://data-seed-prebsc-1-s1.binance.org:8545/', //done
+    alternativeUrls: [
+      {
+        rpcUrl: 'https://data-seed-prebsc-2-s2.binance.org:8545/', //done
+        name: 'chapel',
+      },
+      {
+        rpcUrl: 'https://data-seed-prebsc-2-s3.binance.org:8545/', //done
+        name: 'chapel',
+      },
+    ],
+    graphHttpUri: GRAPH_XDAI_HTTP,
+    graphWsUri: GRAPH_XDAI_WS,
+    klerosCurateGraphHttpUri: KLEROS_CURATE_GRAPH_RINKEBY_HTTP,
+    klerosCurateGraphWsUri: KLEROS_CURATE_GRAPH_RINKEBY_WS,
+    realitioTimeout: 86400,
+    earliestBlockToCheck: EARLIEST_RINKEBY_BLOCK_TO_CHECK,
+    omenTCRListId: 2,
+    contracts: {
+      realitio: '0x20b1F8818d656bB953fF2a27d769E4eC354af0b9',
+      realitioScalarAdapter: '0xb0b82068b7a62eca477b69c00590E7B159459b7E', // done
+      marketMakerFactory: '0xA57e335b00a095431E0DfE05eC95129ADDF30e6f', //done
+      conditionalTokens: '0x287B24D8677b3e8ae258fa9944fe5f2A9C7b6193', //done
+      oracle: '0x20b1F8818d656bB953fF2a27d769E4eC354af0b9', // done
+      klerosBadge: '0x0000000000000000000000000000000000000000',
+      klerosTokenView: '0x0000000000000000000000000000000000000000',
+      klerosTCR: '0x0000000000000000000000000000000000000000',
+      dxTCR: '0x62E8d62a8f963dA809279Fefb9167Dc8249553B5', // done
+      omenVerifiedMarkets: '0x47bbfbe2E0af879feF015E358F0705Cbb909b5b2', // done GeneralizedTCR
+    },
+    cpk: {
+      masterCopyAddress: '0x523D5812a0525B8F6dDff67A4Ce01e4046627447', // done
+      proxyFactoryAddress: '0xaCB4A66935743D50e108b60f3485d08E6a46e6BB', // done
+      multiSendAddress: '0x4858669B0FC71D65b14a6f4cB76cb896c4AEaDF1', //done
+      fallbackHandlerAddress: '0xc1AA39746F55f272fAe632da350db86eDd26F62b', // done
+    },
+    relayProxyFactoryAddress: '0x7b9756f8A7f4208fE42FE8DE8a8CC5aA9A03f356',
+    wrapToken: 'wxdai',
+    nativeAsset: {
+      address: pseudoNativeAssetAddress,
+      image: getImageUrl('0x6b175474e89094c44da98b954eedeac495271d0f'),
+      symbol: 'xDAI',
+      decimals: 18,
+    },
+    targetSafeImplementation: '0x6851D6fDFAfD08c0295C392436245E5bc78B0185',
+    blockExplorer: 'blockscout',
+    blockExplorerURL: 'https://blockscout.com/poa/xdai',
+  },
 }
 
 export const getChainSpecificAlternativeUrls = (networkId: any) => {
@@ -418,6 +470,7 @@ export const knownTokens: { [name in KnownToken]: KnownTokenData } = {
     addresses: {
       [networkIds.MAINNET]: '0x6b175474e89094c44da98b954eedeac495271d0f',
       [networkIds.RINKEBY]: '0x5592ec0cfb4dbc12d3ab100b257153436a1f0fea',
+      [networkIds.chapel]: '0xEC5dCb5Dbf4B114C9d0F65BcCAb49EC54F6A0867',
     },
     order: 1,
   },
@@ -434,6 +487,7 @@ export const knownTokens: { [name in KnownToken]: KnownTokenData } = {
     decimals: 18,
     addresses: {
       [networkIds.XDAI]: '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d',
+      [networkIds.chapel]: '0xEC5dCb5Dbf4B114C9d0F65BcCAb49EC54F6A0867', // TODO 存疑
     },
     order: 1,
   },
@@ -455,6 +509,7 @@ export const knownTokens: { [name in KnownToken]: KnownTokenData } = {
     addresses: {
       [networkIds.MAINNET]: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
       [networkIds.RINKEBY]: '0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b',
+      [networkIds.chapel]: '0x16227D60f7a0e586C66B005219dfc887D13C9531',
       // [networkIds.XDAI]: '0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83',
     },
     order: 4,
@@ -527,8 +582,9 @@ export const getToken = (networkId: number, tokenId: KnownToken): Token => {
   }
 
   const address = token.addresses[networkId]
-
   if (!address) {
+    // eslint-disable-next-line
+    debugger
     throw new Error(`Unsupported address in network: '${networkId}'`)
   }
 
@@ -820,6 +876,8 @@ export const getOmenTCRListId = (networkId: number): number => {
 
 export const getWrapToken = (networkId: number): Token => {
   if (!validNetworkId(networkId)) {
+    // eslint-disable-next-line
+    debugger
     throw new Error(`Unsupported network id: '${networkId}'`)
   }
   const tokenId = networks[networkId].wrapToken as KnownToken
