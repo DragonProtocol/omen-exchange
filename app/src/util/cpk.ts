@@ -125,6 +125,28 @@ class OCPK extends CPK {
       masterCopyAddress: this.masterCopyAddress,
       fallbackHandlerAddress: this.fallbackHandlerAddress,
     }
+    // eslint-disable-next-line no-console
+    console.info(
+      'txManager.execTransactions: ',
+      'ownerAccount - ',
+      ownerAccount,
+      'safeExecTxParams - ',
+      safeExecTxParams,
+      'safeExecTxParams - ',
+      transactions,
+      'cpkContracts - ',
+      cpkContracts,
+      'this.ethLibAdapter - ',
+      this.ethLibAdapter,
+      'this.saltNonce - ',
+      this.saltNonce,
+      'isDeployed - ',
+      isDeployed,
+      'this.isConnectedToSafe - ',
+      this.isConnectedToSafe,
+      'sendOptions - ',
+      sendOptions,
+    )
 
     return txManager.execTransactions({
       ownerAccount,

@@ -1,10 +1,17 @@
+/*
+ * @Author: bufan
+ * @Date: 2021-09-18 15:19:22
+ * @LastEditors: bufan
+ * @LastEditTime: 2021-09-27 17:17:37
+ * @Description: file content
+ */
 import { useMemo } from 'react'
 
-import { IPFS_GATEWAY } from '../common/constants'
+// import { IPFS_GATEWAY } from '../common/constants'
 import {
   ConditionalTokenService,
   DxTCRService,
-  KlerosService,
+  // KlerosService,
   MarketMakerFactoryService,
   MarketMakerService,
   OracleService,
@@ -39,23 +46,23 @@ export const useContracts = (context: ConnectedWeb3Context) => {
   const oracleAddress = getContractAddress(networkId, 'oracle')
   const oracle = useMemo(() => new OracleService(oracleAddress, provider, account), [oracleAddress, provider, account])
 
-  const klerosBadgeAddress = getContractAddress(networkId, 'klerosBadge')
-  const klerosTokenViewAddress = getContractAddress(networkId, 'klerosTokenView')
-  const klerosTCRAddress = getContractAddress(networkId, 'klerosTCR')
-  const omenVerifiedMarketsAddress = getContractAddress(networkId, 'omenVerifiedMarkets')
-  const kleros = useMemo(
-    () =>
-      new KlerosService(
-        klerosBadgeAddress,
-        klerosTokenViewAddress,
-        klerosTCRAddress,
-        omenVerifiedMarketsAddress,
-        provider,
-        account,
-        IPFS_GATEWAY,
-      ),
-    [klerosBadgeAddress, klerosTokenViewAddress, klerosTCRAddress, omenVerifiedMarketsAddress, provider, account],
-  )
+  // const klerosBadgeAddress = getContractAddress(networkId, 'klerosBadge')
+  // const klerosTokenViewAddress = getContractAddress(networkId, 'klerosTokenView')
+  // const klerosTCRAddress = getContractAddress(networkId, 'klerosTCR')
+  // const omenVerifiedMarketsAddress = getContractAddress(networkId, 'omenVerifiedMarkets')
+  // const kleros = useMemo(
+  //   () =>
+  //     new KlerosService(
+  //       klerosBadgeAddress,
+  //       klerosTokenViewAddress,
+  //       klerosTCRAddress,
+  //       omenVerifiedMarketsAddress,
+  //       provider,
+  //       account,
+  //       IPFS_GATEWAY,
+  //     ),
+  //   [klerosBadgeAddress, klerosTokenViewAddress, klerosTCRAddress, omenVerifiedMarketsAddress, provider, account],
+  // )
 
   const buildMarketMaker = useMemo(
     () => (address: string) => new MarketMakerService(address, conditionalTokens, realitio, provider, account),
@@ -65,6 +72,19 @@ export const useContracts = (context: ConnectedWeb3Context) => {
   const dxTCRAddress = getContractAddress(networkId, 'dxTCR')
   const dxTCR = useMemo(() => new DxTCRService(dxTCRAddress, provider), [provider, dxTCRAddress])
 
+  // return useMemo(
+  //   () => ({
+  //     conditionalTokens,
+  //     marketMakerFactory,
+  //     realitio,
+  //     oracle,
+  //     buildMarketMaker,
+  //     kleros,
+  //     dxTCR,
+  //   }),
+  //   [conditionalTokens, marketMakerFactory, realitio, oracle, kleros, buildMarketMaker, dxTCR],
+  // )
+
   return useMemo(
     () => ({
       conditionalTokens,
@@ -72,10 +92,9 @@ export const useContracts = (context: ConnectedWeb3Context) => {
       realitio,
       oracle,
       buildMarketMaker,
-      kleros,
       dxTCR,
     }),
-    [conditionalTokens, marketMakerFactory, realitio, oracle, kleros, buildMarketMaker, dxTCR],
+    [conditionalTokens, marketMakerFactory, realitio, oracle, buildMarketMaker, dxTCR],
   )
 }
 

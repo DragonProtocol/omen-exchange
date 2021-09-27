@@ -223,8 +223,11 @@ const wrangleResponse = (data: GraphResponseFixedProductMarketMaker, networkId: 
       bonds: getBondedItems(outcomes, data.question.answers),
     },
     curatedByDxDao: data.curatedByDxDao,
-    klerosTCRregistered: data.klerosTCRregistered,
-    curatedByDxDaoOrKleros: data.curatedByDxDaoOrKleros,
+    // klerosTCRregistered: data.klerosTCRregistered,
+    klerosTCRregistered: true,
+    // curatedByDxDaoOrKleros: data.curatedByDxDaoOrKleros,
+    // eslint-disable-next-line no-warning-comments
+    curatedByDxDaoOrKleros: true, //todo by bufan
     submissionIDs: data.submissionIDs,
     scalarLow: data.scalarLow ? bigNumberify(data.scalarLow || 0) : null,
     scalarHigh: data.scalarHigh ? bigNumberify(data.scalarHigh || 0) : null,
