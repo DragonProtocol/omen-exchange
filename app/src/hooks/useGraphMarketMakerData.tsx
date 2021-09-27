@@ -226,6 +226,7 @@ const wrangleResponse = (data: GraphResponseFixedProductMarketMaker, networkId: 
     // klerosTCRregistered: data.klerosTCRregistered,
     klerosTCRregistered: true,
     // curatedByDxDaoOrKleros: data.curatedByDxDaoOrKleros,
+    // eslint-disable-next-line no-warning-comments
     curatedByDxDaoOrKleros: true, //todo by bufan
     submissionIDs: data.submissionIDs,
     scalarLow: data.scalarLow ? bigNumberify(data.scalarLow || 0) : null,

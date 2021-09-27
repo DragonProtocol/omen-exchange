@@ -2,12 +2,12 @@
  * @Author: bufan
  * @Date: 2021-09-18 15:19:22
  * @LastEditors: bufan
- * @LastEditTime: 2021-09-27 13:43:41
+ * @LastEditTime: 2021-09-27 17:17:37
  * @Description: file content
  */
 import { useMemo } from 'react'
 
-import { IPFS_GATEWAY } from '../common/constants'
+// import { IPFS_GATEWAY } from '../common/constants'
 import {
   ConditionalTokenService,
   DxTCRService,
