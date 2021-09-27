@@ -4,6 +4,8 @@ import {
   DEFAULT_ARBITRATOR,
   EARLIEST_MAINNET_BLOCK_TO_CHECK,
   EARLIEST_RINKEBY_BLOCK_TO_CHECK,
+  GRAPH_CHAPEL_HTTP,
+  GRAPH_CHAPEL_WS,
   GRAPH_MAINNET_HTTP,
   GRAPH_MAINNET_WS,
   GRAPH_RINKEBY_HTTP,
@@ -299,8 +301,8 @@ const networks: { [K in NetworkId]: Network } = {
         name: 'chapel',
       },
     ],
-    graphHttpUri: GRAPH_XDAI_HTTP,
-    graphWsUri: GRAPH_XDAI_WS,
+    graphHttpUri: GRAPH_CHAPEL_HTTP,
+    graphWsUri: GRAPH_CHAPEL_WS,
     klerosCurateGraphHttpUri: KLEROS_CURATE_GRAPH_RINKEBY_HTTP,
     klerosCurateGraphWsUri: KLEROS_CURATE_GRAPH_RINKEBY_WS,
     realitioTimeout: 86400,
@@ -312,9 +314,9 @@ const networks: { [K in NetworkId]: Network } = {
       marketMakerFactory: '0xA57e335b00a095431E0DfE05eC95129ADDF30e6f', //done
       conditionalTokens: '0x287B24D8677b3e8ae258fa9944fe5f2A9C7b6193', //done
       oracle: '0x20b1F8818d656bB953fF2a27d769E4eC354af0b9', // done
-      klerosBadge: '0x0000000000000000000000000000000000000000',
-      klerosTokenView: '0x0000000000000000000000000000000000000000',
-      klerosTCR: '0x0000000000000000000000000000000000000000',
+      klerosBadge: '0xd74B780df87fa50C3aCbdAa49A85a7485fFE9d5A',
+      klerosTokenView: '0x20E5efb4B3504cBc234213E59ed8f271418F3A06',
+      klerosTCR: '0x4186F8a4519Aeb257334fC0F540Ca693e88b138E',
       dxTCR: '0x62E8d62a8f963dA809279Fefb9167Dc8249553B5', // done
       omenVerifiedMarkets: '0x47bbfbe2E0af879feF015E358F0705Cbb909b5b2', // done GeneralizedTCR
     },
@@ -325,16 +327,16 @@ const networks: { [K in NetworkId]: Network } = {
       fallbackHandlerAddress: '0xc1AA39746F55f272fAe632da350db86eDd26F62b', // done
     },
     relayProxyFactoryAddress: '0x7b9756f8A7f4208fE42FE8DE8a8CC5aA9A03f356',
-    wrapToken: 'wxdai',
+    wrapToken: 'wbnb',
     nativeAsset: {
       address: pseudoNativeAssetAddress,
-      image: getImageUrl('0x6b175474e89094c44da98b954eedeac495271d0f'),
-      symbol: 'xDAI',
+      image: getImageUrl('0x094616F0BdFB0b526bD735Bf66Eca0Ad254ca81F'),
+      symbol: 'BNB',
       decimals: 18,
     },
-    targetSafeImplementation: '0x6851D6fDFAfD08c0295C392436245E5bc78B0185',
-    blockExplorer: 'blockscout',
-    blockExplorerURL: 'https://blockscout.com/poa/xdai',
+    targetSafeImplementation: '0x523D5812a0525B8F6dDff67A4Ce01e4046627447',
+    blockExplorer: 'bscscan',
+    blockExplorerURL: 'https://testnet.bscscan.com/',
   },
 }
 
@@ -391,6 +393,14 @@ export const knownTokens: { [name in KnownToken]: KnownTokenData } = {
       [networkIds.RINKEBY]: '0x0A08ECa47C56C305F4FeB4fa062AEcd5807BeBb8',
     },
     order: 22,
+  },
+  wbnb: {
+    symbol: 'wBNB',
+    decimals: 18,
+    addresses: {
+      [networkIds.chapel]: '0xEC5dCb5Dbf4B114C9d0F65BcCAb49EC54F6A0867',
+    },
+    order: 100,
   },
   stake: {
     symbol: 'STAKE',
@@ -487,7 +497,7 @@ export const knownTokens: { [name in KnownToken]: KnownTokenData } = {
     decimals: 18,
     addresses: {
       [networkIds.XDAI]: '0xe91d153e0b41518a2ce8dd3d7944fa863463a97d',
-      [networkIds.chapel]: '0xEC5dCb5Dbf4B114C9d0F65BcCAb49EC54F6A0867', // TODO 存疑
+      // [networkIds.chapel]: '0xEC5dCb5Dbf4B114C9d0F65BcCAb49EC54F6A0867', // TODO 存疑
     },
     order: 1,
   },
@@ -509,7 +519,8 @@ export const knownTokens: { [name in KnownToken]: KnownTokenData } = {
     addresses: {
       [networkIds.MAINNET]: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
       [networkIds.RINKEBY]: '0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b',
-      [networkIds.chapel]: '0x16227D60f7a0e586C66B005219dfc887D13C9531',
+      // [networkIds.chapel]: '0x16227D60f7a0e586C66B005219dfc887D13C9531',
+      [networkIds.chapel]: '0x343440AFDdD1c26Bd0E81D453b533BC81f4d4346', //自己部署的USDC合约
       // [networkIds.XDAI]: '0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83',
     },
     order: 4,
@@ -583,8 +594,6 @@ export const getToken = (networkId: number, tokenId: KnownToken): Token => {
 
   const address = token.addresses[networkId]
   if (!address) {
-    // eslint-disable-next-line
-    debugger
     throw new Error(`Unsupported address in network: '${networkId}'`)
   }
 
@@ -684,6 +693,7 @@ export const knownArbitrators: { [name in KnownArbitrator]: KnownArbitratorData 
       [networkIds.RINKEBY]: '0xcafa054b1b054581faf65adce667bf1c684b6ef0',
       [networkIds.SOKOL]: '0x37Fcdb26F12f3FC76F2424EC6B94D434a959A0f7',
       [networkIds.XDAI]: '0xe40DD83a262da3f56976038F1554Fe541Fa75ecd',
+      [networkIds.chapel]: '0xd47f72a2d1d0E91b0Ec5e5f5d02B2dc26d00A14D', //added by bufan
     },
     isSelectionEnabled: true,
   },
@@ -876,8 +886,6 @@ export const getOmenTCRListId = (networkId: number): number => {
 
 export const getWrapToken = (networkId: number): Token => {
   if (!validNetworkId(networkId)) {
-    // eslint-disable-next-line
-    debugger
     throw new Error(`Unsupported network id: '${networkId}'`)
   }
   const tokenId = networks[networkId].wrapToken as KnownToken
