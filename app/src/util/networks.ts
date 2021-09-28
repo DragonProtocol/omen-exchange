@@ -398,7 +398,7 @@ export const knownTokens: { [name in KnownToken]: KnownTokenData } = {
     symbol: 'wBNB',
     decimals: 18,
     addresses: {
-      [networkIds.chapel]: '0xEC5dCb5Dbf4B114C9d0F65BcCAb49EC54F6A0867',
+      [networkIds.chapel]: '0x094616F0BdFB0b526bD735Bf66Eca0Ad254ca81F',
     },
     order: 100,
   },
@@ -520,7 +520,7 @@ export const knownTokens: { [name in KnownToken]: KnownTokenData } = {
       [networkIds.MAINNET]: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
       [networkIds.RINKEBY]: '0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b',
       // [networkIds.chapel]: '0x16227D60f7a0e586C66B005219dfc887D13C9531',
-      [networkIds.chapel]: '0x343440AFDdD1c26Bd0E81D453b533BC81f4d4346', //自己部署的USDC合约
+      [networkIds.chapel]: '0xb86b3204C8C4dA20F93a33D80658929001585975', //自己部署的USDC合约
       // [networkIds.XDAI]: '0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83',
     },
     order: 4,
