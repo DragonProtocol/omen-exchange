@@ -314,11 +314,11 @@ const networks: { [K in NetworkId]: Network } = {
       marketMakerFactory: '0xA57e335b00a095431E0DfE05eC95129ADDF30e6f', //done
       conditionalTokens: '0x287B24D8677b3e8ae258fa9944fe5f2A9C7b6193', //done
       oracle: '0x20b1F8818d656bB953fF2a27d769E4eC354af0b9', // done
-      klerosBadge: '0xd74B780df87fa50C3aCbdAa49A85a7485fFE9d5A',
-      klerosTokenView: '0x20E5efb4B3504cBc234213E59ed8f271418F3A06',
-      klerosTCR: '0x4186F8a4519Aeb257334fC0F540Ca693e88b138E',
+      klerosBadge: '0x0000000000000000000000000000000000000000', //不使用kleros
+      klerosTokenView: '0x0000000000000000000000000000000000000000', //不使用kleros
+      klerosTCR: '0x0000000000000000000000000000000000000000', //不使用kleros
       dxTCR: '0x62E8d62a8f963dA809279Fefb9167Dc8249553B5', // done
-      omenVerifiedMarkets: '0x47bbfbe2E0af879feF015E358F0705Cbb909b5b2', // done GeneralizedTCR
+      omenVerifiedMarkets: '0x0000000000000000000000000000000000000000', //不使用kleros
     },
     cpk: {
       masterCopyAddress: '0x523D5812a0525B8F6dDff67A4Ce01e4046627447', // done

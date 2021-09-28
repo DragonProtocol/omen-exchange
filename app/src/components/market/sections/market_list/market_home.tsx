@@ -571,7 +571,12 @@ export const MarketHome: React.FC<Props> = (props: Props) => {
             curationSource={curationSource}
             currency={currency}
             disableCurationFilter={
-              fetchMyMarkets || context.networkId === networkIds.XDAI || context.relay ? true : false
+              fetchMyMarkets ||
+              context.networkId === networkIds.XDAI ||
+              context.networkId === networkIds.chapel ||
+              context.relay
+                ? true
+                : false
             }
             onChangeArbitrator={setArbitrator}
             onChangeCurationSource={setCurationSource}
