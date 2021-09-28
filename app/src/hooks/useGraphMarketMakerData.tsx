@@ -188,7 +188,8 @@ const getBondedItems = (outcomes: string[], answers: AnswerItem[]): BondItem[] =
 
 const wrangleResponse = (data: GraphResponseFixedProductMarketMaker, networkId: number): GraphMarketMakerData => {
   const outcomes = data.outcomes ? data.outcomes : getOutcomes(networkId, +data.templateId)
-
+  // eslint-disable-next-line
+  // debugger
   return {
     address: data.id,
     answerFinalizedTimestamp: data.answerFinalizedTimestamp ? bigNumberify(data.answerFinalizedTimestamp) : null,
@@ -223,8 +224,9 @@ const wrangleResponse = (data: GraphResponseFixedProductMarketMaker, networkId: 
       bonds: getBondedItems(outcomes, data.question.answers),
     },
     curatedByDxDao: data.curatedByDxDao,
-    klerosTCRregistered: data.klerosTCRregistered,
-    curatedByDxDaoOrKleros: data.curatedByDxDaoOrKleros,
+    // klerosTCRregistered: data.klerosTCRregistered,
+    klerosTCRregistered: true,
+    curatedByDxDaoOrKleros: true,
     submissionIDs: data.submissionIDs,
     scalarLow: data.scalarLow ? bigNumberify(data.scalarLow || 0) : null,
     scalarHigh: data.scalarHigh ? bigNumberify(data.scalarHigh || 0) : null,

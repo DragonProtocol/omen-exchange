@@ -27,6 +27,9 @@ export const useCpkProxy = () => {
         await cpk.upgradeProxyImplementation()
         setUpdated(RemoteData.success(true))
       } catch (e) {
+        console.log(211, e)
+        // eslint-disable-next-line
+        // debugger
         setUpdated(RemoteData.failure(e))
       }
     }

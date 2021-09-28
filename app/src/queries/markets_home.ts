@@ -110,7 +110,7 @@ export const buildQueryMarkets = (options: BuildQueryType = DEFAULT_OPTIONS) => 
     templateId ? 'templateId: $templateId' : whitelistedTemplateIds ? 'templateId_in: ["0", "1", "2", "6"]' : '',
     'fee_lte: $fee',
     `timeout_gte: ${MIN_TIMEOUT}`,
-    networkId === networkIds.XDAI || networkId === networkIds.SOKOL
+    networkId === networkIds.XDAI || networkId === networkIds.SOKOL || networkId === networkIds.chapel
       ? 'curatedByDxDaoOrKleros: false'
       : curationSource === CurationSource.DXDAO
       ? `curatedByDxDao: true`

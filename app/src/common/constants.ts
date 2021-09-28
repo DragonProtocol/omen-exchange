@@ -61,6 +61,8 @@ export const GRAPH_SOKOL_HTTP = 'https://api.thegraph.com/subgraphs/name/protofi
 export const GRAPH_SOKOL_WS = 'wss://api.thegraph.com/subgraphs/name/protofire/omen-sokol'
 export const GRAPH_XDAI_HTTP = 'https://api.thegraph.com/subgraphs/name/protofire/omen-xdai'
 export const GRAPH_XDAI_WS = 'wss://api.thegraph.com/subgraphs/name/protofire/omen-xdai'
+export const GRAPH_CHAPEL_HTTP = 'https://api.thegraph.com/subgraphs/name/sin-bufan/omen-bsct'
+export const GRAPH_CHAPEL_WS = 'wss://api.thegraph.com/subgraphs/name/sin-bufan/omen-bsct'
 
 export const KLEROS_CURATE_GRAPH_MAINNET_HTTP = 'https://api.thegraph.com/subgraphs/name/kleros/curate'
 export const KLEROS_CURATE_GRAPH_MAINNET_WS = 'wss://api.thegraph.com/subgraphs/name/kleros/curate'
@@ -73,7 +75,7 @@ export const XDAI_FOREIGN_BRIDGE = 'https://api.thegraph.com/subgraphs/name/maxa
 export const OMNI_HOME_BRIDGE = 'https://api.thegraph.com/subgraphs/name/raid-guild/xdai-omnibridge'
 export const OMNI_FOREIGN_BRIDGE = 'https://api.thegraph.com/subgraphs/name/raid-guild/mainnet-omnibridge'
 
-export const IPFS_GATEWAY = 'https://ipfs.kleros.io'
+// export const IPFS_GATEWAY = 'https://ipfs.kleros.io'
 
 export const Logo = OmenLogo
 

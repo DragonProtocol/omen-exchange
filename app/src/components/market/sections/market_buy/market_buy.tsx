@@ -316,7 +316,8 @@ const MarketBuyWrapper: React.FC<Props> = (props: Props) => {
     formatBigNumber(displayTradedShares, baseCollateral.decimals, baseCollateral.decimals),
   )
   const total = `${sharesTotal} Shares`
-
+  // eslint-disable-next-line
+  // debugger
   const amountError = isTransactionProcessing
     ? null
     : maybeCollateralBalance === null

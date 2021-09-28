@@ -155,7 +155,6 @@ export const ScalarMarketBuy = (props: Props) => {
     if (!cpk) {
       return
     }
-
     await unlock()
     setAllowanceFinished(true)
   }

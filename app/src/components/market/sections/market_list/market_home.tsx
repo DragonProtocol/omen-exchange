@@ -496,7 +496,6 @@ export const MarketHome: React.FC<Props> = (props: Props) => {
             content: <CustomDropdownItem>{'All Categories'}</CustomDropdownItem>,
           },
         ]
-
   const noOwnMarkets = RemoteData.is.success(markets) && markets.data.length === 0 && state === MarketStates.myMarkets
   const noMarketsAvailable =
     RemoteData.is.success(markets) && markets.data.length === 0 && state !== MarketStates.myMarkets

@@ -260,7 +260,6 @@ class CPKService {
         value: fee,
       })
     }
-
     const txObject = await this.cpk.execTransactions(transactions, txOptions)
     setTxState && setTxState(TransactionStep.transactionSubmitted)
     setTxHash && setTxHash(txObject.hash)
@@ -442,7 +441,6 @@ class CPKService {
       if (!resolution) {
         throw new Error('Resolution time was not specified')
       }
-
       const signer = this.provider.getSigner()
       const account = await signer.getAddress()
 
@@ -457,14 +455,16 @@ class CPKService {
       const transactions: Transaction[] = []
       const txOptions: TxOptions = {}
       await this.getGas(txOptions)
-
+      // eslint-disable-next-line
+      // debugger
       const fundingAmount = await this.subRelayFee(marketData.funding)
 
       let collateral
       if (marketData.collateral.address === pseudoNativeAssetAddress && !useCompoundReserve) {
         // ultimately WETH will be the collateral if we fund with native ether
         collateral = getWrapToken(networkId)
-
+        // eslint-disable-next-line
+        // debugger
         // we need to send the funding amount in native ether
         if (!this.isSafeApp) {
           txOptions.value = fundingAmount
@@ -612,13 +612,16 @@ class CPKService {
           distributionHint,
         ),
       })
-
+      // eslint-disable-next-line
+      debugger
       const transaction = await this.execTransactions(transactions, txOptions, setTxHash, setTxState)
       return {
         transaction,
         marketMakerAddress: predictedMarketMakerAddress,
       }
     } catch (err) {
+      // eslint-disable-next-line
+      debugger
       logger.error(`There was an error creating the market maker`, err.message)
       throw err
     }
@@ -635,6 +638,8 @@ class CPKService {
     setTxState,
     useCompoundReserve,
   }: CPKCreateMarketParams): Promise<CreateMarketResult> => {
+    // eslint-disable-next-line
+    debugger
     try {
       const {
         arbitrator,
@@ -1462,6 +1467,8 @@ class CPKService {
 
   upgradeProxyImplementation = async (): Promise<TransactionReceipt> => {
     try {
+      // eslint-disable-next-line
+      // debugger
       const txOptions: TxOptions = {}
       const network = await this.provider.getNetwork()
       await this.getGas(txOptions)

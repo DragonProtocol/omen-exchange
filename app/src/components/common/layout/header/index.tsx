@@ -350,7 +350,7 @@ const HeaderContainer: React.FC = (props: any) => {
                     ? `${formattedxDaiBalance} DAI`
                     : context.rawWeb3Context.networkId === networkIds.XDAI
                     ? `${formattedNativeBalance} xDAI`
-                    : `${formattedNativeBalance} ETH`}
+                    : `${formattedNativeBalance} BNB`}
                 </DepositedBalance>
                 <HeaderButtonDivider />
               </>
