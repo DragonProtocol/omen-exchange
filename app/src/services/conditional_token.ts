@@ -79,19 +79,49 @@ class ConditionalTokenService {
   getBalanceOfByBlock = async (ownerAddress: string, positionId: BigNumber, block: number): Promise<BigNumber> => {
     return this.contract.balanceOf(ownerAddress, positionId, { blockTag: block })
   }
+  /**
+   * @description: 这个函数从链上查找相应的区块
+   * @param {any} filter 查找条件
+   * @param {number} startBlock 开始区块no
+   * @return {*} 查找结果
+   */
+  getLogsWraper = async (filter: any, startBlock: number) => {
+    let logs = []
+    let endOfBlock = false
+    //因为getLogs函数一次最多查找5000个区块，所以要分多次进行
+    const MAX_LOGS_NUM = 5000
+    while (logs.length === 0 && !endOfBlock) {
+      try {
+        logs = await this.provider.getLogs({
+          ...filter,
+          fromBlock: startBlock,
+          toBlock: 'latest',
+        })
+        endOfBlock = true
+      } catch (err) {
+        logs = await this.provider.getLogs({
+          ...filter,
+          fromBlock: startBlock,
+          toBlock: startBlock + MAX_LOGS_NUM - 1,
+        })
+        startBlock = startBlock + MAX_LOGS_NUM
+      }
+    }
 
+    return logs
+  }
   getQuestionId = async (conditionId: string): Promise<string> => {
     const filter: any = this.contract.filters.ConditionPreparation(conditionId)
 
     const network = await this.provider.getNetwork()
     const networkId = network.chainId
 
-    const logs = await this.provider.getLogs({
-      ...filter,
-      fromBlock: getEarliestBlockToCheck(networkId),
-      toBlock: 'latest',
-    })
-
+    // const logs = await this.provider.getLogs({
+    //   ...filter,
+    //   fromBlock: getEarliestBlockToCheck(networkId),
+    //   toBlock: 'latest',
+    // })
+    const logs = await this.getLogsWraper(filter, getEarliestBlockToCheck(networkId))
     if (logs.length === 0) {
       throw new Error(`No ConditionPreparation event found for conditionId '${conditionId}'`)
     }

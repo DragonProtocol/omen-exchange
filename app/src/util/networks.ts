@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import {
   DEFAULT_ARBITRATOR,
+  EARLIEST_CHAPEL_BLOCK_TO_CHECK,
   EARLIEST_MAINNET_BLOCK_TO_CHECK,
   EARLIEST_RINKEBY_BLOCK_TO_CHECK,
   GRAPH_CHAPEL_HTTP,
@@ -305,15 +306,16 @@ const networks: { [K in NetworkId]: Network } = {
     graphWsUri: GRAPH_CHAPEL_WS,
     klerosCurateGraphHttpUri: KLEROS_CURATE_GRAPH_RINKEBY_HTTP,
     klerosCurateGraphWsUri: KLEROS_CURATE_GRAPH_RINKEBY_WS,
-    realitioTimeout: 86400,
-    earliestBlockToCheck: EARLIEST_RINKEBY_BLOCK_TO_CHECK,
+    realitioTimeout: 120, //以后要改回86400
+    earliestBlockToCheck: EARLIEST_CHAPEL_BLOCK_TO_CHECK, //这个表示从那个块开始搜索
     omenTCRListId: 2,
     contracts: {
       realitio: '0x20b1F8818d656bB953fF2a27d769E4eC354af0b9',
       realitioScalarAdapter: '0xb0b82068b7a62eca477b69c00590E7B159459b7E', // done
       marketMakerFactory: '0xA57e335b00a095431E0DfE05eC95129ADDF30e6f', //done
       conditionalTokens: '0x287B24D8677b3e8ae258fa9944fe5f2A9C7b6193', //done
-      oracle: '0x20b1F8818d656bB953fF2a27d769E4eC354af0b9', // done
+      oracle: '0x9CA8F37b56003eF7F301c7329530E45404df1d32', // done 这个其实就是realitioAdapter
+      // oracle: '0x20b1F8818d656bB953fF2a27d769E4eC354af0b9', // done 这个其实就是realitioAdapter
       klerosBadge: '0x0000000000000000000000000000000000000000', //不使用kleros
       klerosTokenView: '0x0000000000000000000000000000000000000000', //不使用kleros
       klerosTCR: '0x0000000000000000000000000000000000000000', //不使用kleros
