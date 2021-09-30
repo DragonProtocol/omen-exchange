@@ -311,6 +311,7 @@ const Wrapper = (props: Props) => {
     const cpkBalance = await realitioService.getBalanceOf(cpk.address)
     const cpkTotal = cpkClaimable.add(cpkBalance)
     setCpkRealitioWithdraw(cpkTotal.gt(Zero))
+    // 在Realitio上拿到余额
     setCpkRealitioBalance(cpkTotal)
   }
 

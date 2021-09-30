@@ -171,6 +171,10 @@ class RealitioService {
     return questionId
   }
 
+  // getUniverseLog({
+  //   let logs =
+  // })
+
   getAnswers = async (questionId: string): Promise<AnswerEvent[]> => {
     const filter: any = this.contract.filters.LogNewAnswer(null, questionId)
     const network = await this.provider.getNetwork()
@@ -180,6 +184,8 @@ class RealitioService {
       fromBlock: getEarliestBlockToCheck(networkId),
       toBlock: 'latest',
     })
+    // eslint-disable-next-line
+    debugger
     const iface = new ethers.utils.Interface(realitioAbi)
     // @ts-expect-error ignore
     const events = logs.map(log => iface.parseLog(log))

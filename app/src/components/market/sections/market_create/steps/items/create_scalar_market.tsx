@@ -121,6 +121,7 @@ export const CreateScalarMarket = (props: Props) => {
     upperBound,
   } = props
 
+  const today = new Date()
   const [lowerBoundFocus, setLowerBoundFocus] = useState(false)
   const [startingPointFocus, setStartingPointFocus] = useState(false)
   const [upperBoundFocus, setUpperBoundFocus] = useState(false)
@@ -273,7 +274,7 @@ export const CreateScalarMarket = (props: Props) => {
             formField={
               <DateField
                 disabled={false}
-                minDate={tomorrow}
+                minDate={today}
                 name="resolution"
                 networkId={context.networkId}
                 onChange={handleDateChange}
