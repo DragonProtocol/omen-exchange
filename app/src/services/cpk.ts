@@ -1151,7 +1151,8 @@ class CPKService {
 
       const txOptions: TxOptions = {}
       await this.getGas(txOptions)
-
+      // eslint-disable-next-line
+      debugger
       const collateralSymbol = collateral.symbol.toLowerCase()
       let userInputCollateral = collateral
       const totalAmountToSend = amountToMerge.add(earnings)
@@ -1228,7 +1229,6 @@ class CPKService {
           })
         }
       }
-
       return this.execTransactions(transactions, txOptions, setTxHash, setTxState)
     } catch (err) {
       logger.error(`There was an error removing amount '${sharesToBurn.toString()}' for funding`, err.message)
@@ -1281,7 +1281,8 @@ class CPKService {
       const transactions: Transaction[] = []
       const txOptions: TxOptions = {}
       await this.getGas(txOptions)
-
+      // eslint-disable-next-line
+      debugger
       if (!isConditionResolved) {
         if (isScalar && scalarLow && scalarHigh) {
           transactions.push({

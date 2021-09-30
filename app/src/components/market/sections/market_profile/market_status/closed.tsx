@@ -346,7 +346,6 @@ const Wrapper = (props: Props) => {
       if (!cpk) {
         return
       }
-
       setStatus(Status.Loading)
       setMessage('Redeeming payout...')
       setTxState(TransactionStep.waitingConfirmation)
@@ -510,6 +509,8 @@ const Wrapper = (props: Props) => {
   } else if (cpkRealitioWithdraw) {
     balanceString = `${formatBigNumber(cpkRealitioBalance, nativeAsset.decimals)} ${nativeAsset.symbol}`
   }
+
+  console.log(222, isConditionResolved, !hasWinningOutcomes, !userRealitioWithdraw, !cpkRealitioWithdraw)
 
   return (
     <>

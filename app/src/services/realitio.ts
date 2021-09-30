@@ -171,19 +171,44 @@ class RealitioService {
     return questionId
   }
 
-  // getUniverseLog({
-  //   let logs =
-  // })
+  getLogsWraper = async (filter: any, startBlock: number): Promise<any> => {
+    let logs = []
+    let endOfBlock = false
+    //因为getLogs函数一次最多查找5000个区块，所以要分多次进行
+    const MAX_LOGS_NUM = 5000
+    while (logs.length === 0 && !endOfBlock) {
+      try {
+        logs = await this.provider.getLogs({
+          ...filter,
+          fromBlock: startBlock,
+          toBlock: 'latest',
+        })
+        endOfBlock = true
+      } catch (err) {
+        logs = await this.provider.getLogs({
+          ...filter,
+          fromBlock: startBlock,
+          toBlock: startBlock + MAX_LOGS_NUM - 1,
+        })
+        startBlock = startBlock + MAX_LOGS_NUM
+      }
+    }
+
+    return logs
+  }
+  // promiseGetlog = () => {
+  //   this.provider.getLogs({
+  //     ...filter,
+  //     fromBlock: startBlock,
+  //     toBlock: stopBlock,
+  //   })
+  // }
 
   getAnswers = async (questionId: string): Promise<AnswerEvent[]> => {
     const filter: any = this.contract.filters.LogNewAnswer(null, questionId)
     const network = await this.provider.getNetwork()
     const networkId = network.chainId
-    const logs = await this.provider.getLogs({
-      ...filter,
-      fromBlock: getEarliestBlockToCheck(networkId),
-      toBlock: 'latest',
-    })
+    const logs = await this.getLogsWraper(...filter, getEarliestBlockToCheck(networkId))
     // eslint-disable-next-line
     debugger
     const iface = new ethers.utils.Interface(realitioAbi)
@@ -197,11 +222,9 @@ class RealitioService {
     const filter: any = this.contract.filters.LogClaim(questionId)
     const network = await this.provider.getNetwork()
     const networkId = network.chainId
-    const logs = await this.provider.getLogs({
-      ...filter,
-      fromBlock: getEarliestBlockToCheck(networkId),
-      toBlock: 'latest',
-    })
+    // eslint-disable-next-line
+    debugger
+    const logs = await this.getLogsWraper(...filter, getEarliestBlockToCheck(networkId))
     return logs.length > 0
   }
 
@@ -290,11 +313,7 @@ class RealitioService {
     const network = await this.provider.getNetwork()
     const networkId = network.chainId
 
-    const logs = await this.provider.getLogs({
-      ...filter,
-      fromBlock: getEarliestBlockToCheck(networkId),
-      toBlock: 'latest',
-    })
+    const logs = await this.getLogsWraper(...filter, getEarliestBlockToCheck(networkId))
 
     if (logs.length === 0) {
       throw new Error(`No LogNewQuestion event found for questionId '${questionId}'`)

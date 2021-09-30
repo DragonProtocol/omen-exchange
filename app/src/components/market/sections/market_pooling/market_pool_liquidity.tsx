@@ -351,6 +351,8 @@ const MarketPoolLiquidityWrapper: React.FC<Props> = (props: Props) => {
       setTxState(TransactionStep.waitingConfirmation)
       setIsTransactionProcessing(true)
       setIsTransactionModalOpen(true)
+      // eslint-disable-next-line
+      debugger
       await cpk.removeFunding({
         amountToMerge: depositedTokens,
         collateral: marketMakerData.collateral,
@@ -365,6 +367,8 @@ const MarketPoolLiquidityWrapper: React.FC<Props> = (props: Props) => {
         sharesToBurn: amountToRemove || Zero,
         useBaseToken,
       })
+      // eslint-disable-next-line
+      debugger
       await fetchGraphMarketMakerData()
       await fetchFundingBalance()
       await fetchCollateralBalance()
