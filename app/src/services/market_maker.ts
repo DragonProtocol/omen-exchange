@@ -258,24 +258,24 @@ class MarketMakerService {
     }
   }
 
-  getExtraData = async (market: Market): Promise<MarketWithExtraData> => {
-    const { conditionId } = market
-    // Get question data
-    const questionId = await this.conditionalTokens.getQuestionId(conditionId)
-    const question = await this.realitio.getQuestion(questionId)
-    // Know if a market is open or closed
-    const isQuestionFinalized = await this.realitio.isFinalized(questionId)
-    const marketStatus = isQuestionFinalized ? MarketStatus.Closed : MarketStatus.Open
+  // getExtraData = async (market: Market): Promise<MarketWithExtraData> => {
+  //   const { conditionId } = market
+  //   // Get question data
+  //   const questionId = await this.conditionalTokens.getQuestionId(conditionId)
+  //   const question = await this.realitio.getQuestion(questionId)
+  //   // Know if a market is open or closed
+  //   const isQuestionFinalized = await this.realitio.isFinalized(questionId)
+  //   const marketStatus = isQuestionFinalized ? MarketStatus.Closed : MarketStatus.Open
 
-    const fee = await this.getFee()
+  //   const fee = await this.getFee()
 
-    return {
-      ...market,
-      question,
-      status: marketStatus,
-      fee,
-    }
-  }
+  //   return {
+  //     ...market,
+  //     question,
+  //     status: marketStatus,
+  //     fee,
+  //   }
+  // }
 
   static encodeBuy = (amount: BigNumber, outcomeIndex: number, outcomeTokensToBuy: BigNumber): string => {
     const buyInterface = new utils.Interface(marketMakerAbi)

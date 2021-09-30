@@ -127,64 +127,64 @@ class MarketMakerFactoryService {
     return marketMakerAddress
   }
 
-  getMarkets = async ({ from, to }: GetMarketsOptions): Promise<Market[]> => {
-    logger.debug(`Fetching markets from '${from}' to '${to}'`)
-    const filter: any = this.contract.filters.FixedProductMarketMakerCreation()
+  // getMarkets = async ({ from, to }: GetMarketsOptions): Promise<Market[]> => {
+  //   logger.debug(`Fetching markets from '${from}' to '${to}'`)
+  //   const filter: any = this.contract.filters.FixedProductMarketMakerCreation()
 
-    const logs = await this.provider.getLogs({
-      ...filter,
-      fromBlock: from,
-      toBlock: to,
-    })
+  //   const logs = await this.provider.getLogs({
+  //     ...filter,
+  //     fromBlock: from,
+  //     toBlock: to,
+  //   })
 
-    if (logs.length === 0) {
-      return []
-    }
+  //   if (logs.length === 0) {
+  //     return []
+  //   }
 
-    const interfaceMarketMakerFactory = new ethers.utils.Interface(marketMakerFactoryAbi)
-    const markets = logs.map(
-      (log: Log): Market => {
-        const parsedLog: LogDescription = interfaceMarketMakerFactory.parseLog(log)
-        const { collateralToken, conditionIds, creator, fixedProductMarketMaker } = parsedLog.values
+  //   const interfaceMarketMakerFactory = new ethers.utils.Interface(marketMakerFactoryAbi)
+  //   const markets = logs.map(
+  //     (log: Log): Market => {
+  //       const parsedLog: LogDescription = interfaceMarketMakerFactory.parseLog(log)
+  //       const { collateralToken, conditionIds, creator, fixedProductMarketMaker } = parsedLog.values
 
-        return {
-          address: fixedProductMarketMaker,
-          ownerAddress: creator,
-          conditionId: conditionIds[0],
-          collateralTokenAddress: collateralToken,
-        }
-      },
-    )
+  //       return {
+  //         address: fixedProductMarketMaker,
+  //         ownerAddress: creator,
+  //         conditionId: conditionIds[0],
+  //         collateralTokenAddress: collateralToken,
+  //       }
+  //     },
+  //   )
 
-    return markets
-  }
+  //   return markets
+  // }
 
-  getMarketsWithExtraData = async (
-    { from, to }: GetMarketsOptions,
-    conditionalTokens: ConditionalTokenService,
-    realitio: RealitioService,
-  ): Promise<MarketWithExtraData[]> => {
-    const markets = await this.getMarkets({ from, to })
+  // getMarketsWithExtraData = async (
+  //   { from, to }: GetMarketsOptions,
+  //   conditionalTokens: ConditionalTokenService,
+  //   realitio: RealitioService,
+  // ): Promise<MarketWithExtraData[]> => {
+  //   const markets = await this.getMarkets({ from, to })
 
-    const marketsWithExtraData = await Promise.all(
-      markets.map(market => {
-        const marketMaker = new MarketMakerService(
-          market.address,
-          conditionalTokens,
-          realitio,
-          this.provider,
-          this.signerAddress,
-        )
-        return marketMaker.getExtraData(market)
-      }),
-    )
+  //   const marketsWithExtraData = await Promise.all(
+  //     markets.map(market => {
+  //       const marketMaker = new MarketMakerService(
+  //         market.address,
+  //         conditionalTokens,
+  //         realitio,
+  //         this.provider,
+  //         this.signerAddress,
+  //       )
+  //       return marketMaker.getExtraData(market)
+  //     }),
+  //   )
 
-    const feeBN = ethers.utils.parseEther('' + MARKET_FEE / Math.pow(10, 2))
+  //   const feeBN = ethers.utils.parseEther('' + MARKET_FEE / Math.pow(10, 2))
 
-    const validMarkets = marketsWithExtraData.filter(market => market.fee.eq(feeBN))
+  //   const validMarkets = marketsWithExtraData.filter(market => market.fee.eq(feeBN))
 
-    return validMarkets
-  }
+  //   return validMarkets
+  // }
 
   static encodeCreateMarketMaker = (
     saltNonce: number,

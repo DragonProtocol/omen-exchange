@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import {
   DEFAULT_ARBITRATOR,
+  EARLIEST_CHAPEL_BLOCK_TO_CHECK,
   EARLIEST_MAINNET_BLOCK_TO_CHECK,
   EARLIEST_RINKEBY_BLOCK_TO_CHECK,
   GRAPH_CHAPEL_HTTP,
@@ -305,15 +306,16 @@ const networks: { [K in NetworkId]: Network } = {
     graphWsUri: GRAPH_CHAPEL_WS,
     klerosCurateGraphHttpUri: KLEROS_CURATE_GRAPH_RINKEBY_HTTP,
     klerosCurateGraphWsUri: KLEROS_CURATE_GRAPH_RINKEBY_WS,
-    realitioTimeout: 86400,
-    earliestBlockToCheck: EARLIEST_RINKEBY_BLOCK_TO_CHECK,
+    realitioTimeout: 120,
+    earliestBlockToCheck: EARLIEST_CHAPEL_BLOCK_TO_CHECK,
     omenTCRListId: 2,
     contracts: {
       realitio: '0x20b1F8818d656bB953fF2a27d769E4eC354af0b9',
       realitioScalarAdapter: '0xb0b82068b7a62eca477b69c00590E7B159459b7E', // done
       marketMakerFactory: '0xA57e335b00a095431E0DfE05eC95129ADDF30e6f', //done
       conditionalTokens: '0x287B24D8677b3e8ae258fa9944fe5f2A9C7b6193', //done
-      oracle: '0x20b1F8818d656bB953fF2a27d769E4eC354af0b9', // done
+      oracle: '0x9CA8F37b56003eF7F301c7329530E45404df1d32', // done 这个其实就是realitioAdapter
+      //oracle: '0x20b1F8818d656bB953fF2a27d769E4eC354af0b9', // done 这个其实就是realitioAdapter
       klerosBadge: '0xd74B780df87fa50C3aCbdAa49A85a7485fFE9d5A',
       klerosTokenView: '0x20E5efb4B3504cBc234213E59ed8f271418F3A06',
       klerosTCR: '0x4186F8a4519Aeb257334fC0F540Ca693e88b138E',
@@ -519,7 +521,6 @@ export const knownTokens: { [name in KnownToken]: KnownTokenData } = {
     addresses: {
       [networkIds.MAINNET]: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
       [networkIds.RINKEBY]: '0x4DBCdF9B62e891a7cec5A2568C3F4FAF9E8Abe2b',
-      // [networkIds.chapel]: '0x16227D60f7a0e586C66B005219dfc887D13C9531',
       [networkIds.chapel]: '0xb86b3204C8C4dA20F93a33D80658929001585975', //自己部署的USDC合约
       // [networkIds.XDAI]: '0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83',
     },

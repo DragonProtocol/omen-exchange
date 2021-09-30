@@ -210,39 +210,39 @@ class KlerosService {
   /**
    * @returns {Promise<MetaEvidence[]>} The array with the most recent meta evidence files for this TCR. First item is the meta evidence used for registration requests and the sencod item is the meta evidence used for removal requests.
    */
-  public async getLatestMetaEvidence(): Promise<MetaEvidence[]> {
-    const logs = (
-      await this.provider.getLogs({
-        ...this.omenVerifiedMarkets.filters.MetaEvidence(),
-        fromBlock: 0,
-      })
-    ).map(log => this.omenVerifiedMarkets.interface.parseLog(log))
+  // public async getLatestMetaEvidence(): Promise<MetaEvidence[]> {
+  //   const logs = (
+  //     await this.provider.getLogs({
+  //       ...this.omenVerifiedMarkets.filters.MetaEvidence(),
+  //       fromBlock: 0,
+  //     })
+  //   ).map(log => this.omenVerifiedMarkets.interface.parseLog(log))
 
-    if (logs.length === 0) throw new Error(`No meta evidence found for TCR at ${this.omenVerifiedMarkets.address}`)
+  //   if (logs.length === 0) throw new Error(`No meta evidence found for TCR at ${this.omenVerifiedMarkets.address}`)
 
-    const metaEvidenceURIs = logs.slice(-2).map(l => l.values._evidence)
+  //   const metaEvidenceURIs = logs.slice(-2).map(l => l.values._evidence)
 
-    const [registrationMetaEvidenceURI, removalMetaEvidenceURI] = metaEvidenceURIs
+  //   const [registrationMetaEvidenceURI, removalMetaEvidenceURI] = metaEvidenceURIs
 
-    const [registrationMetaEvidence, removalMetaEvidence] = await Promise.all(
-      (
-        await Promise.all([
-          fetch(`${this.ipfsGateway}${registrationMetaEvidenceURI}`),
-          fetch(`${this.ipfsGateway}${removalMetaEvidenceURI}`),
-        ])
-      ).map(response => response.json()),
-    )
+  //   const [registrationMetaEvidence, removalMetaEvidence] = await Promise.all(
+  //     (
+  //       await Promise.all([
+  //         fetch(`${this.ipfsGateway}${registrationMetaEvidenceURI}`),
+  //         fetch(`${this.ipfsGateway}${removalMetaEvidenceURI}`),
+  //       ])
+  //     ).map(response => response.json()),
+  //   )
 
-    return [registrationMetaEvidence, removalMetaEvidence]
-  }
+  //   return [registrationMetaEvidence, removalMetaEvidence]
+  // }
 
   /**
    * @returns {Promise<string>} The URL to the listing criteria.
    */
-  public async getListingCriteriaURL(): Promise<string> {
-    const [registrationMetaEvidence] = await this.getLatestMetaEvidence()
-    return `${this.ipfsGateway}${registrationMetaEvidence.fileURI}`
-  }
+  // public async getListingCriteriaURL(): Promise<string> {
+  //   const [registrationMetaEvidence] = await this.getLatestMetaEvidence()
+  //   return `${this.ipfsGateway}${registrationMetaEvidence.fileURI}`
+  // }
 
   /**
    * @returns {Promise<BigNumber>} The duration of the challenge period in seconds.

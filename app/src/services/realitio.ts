@@ -8,6 +8,7 @@ import { Moment } from 'moment'
 
 import { REALITIO_TIMEOUT, SINGLE_SELECT_TEMPLATE_ID, UINT_TEMPLATE_ID } from '../common/constants'
 import { Outcome } from '../components/market/sections/market_create/steps/outcomes'
+import { getBSCLogs } from '../util/get_bsc_logs'
 import { getLogger } from '../util/logger'
 import { getEarliestBlockToCheck, getRealitioTimeout } from '../util/networks'
 import { Question, QuestionLog, TransactionStep } from '../util/types'
@@ -175,13 +176,13 @@ class RealitioService {
     const filter: any = this.contract.filters.LogNewAnswer(null, questionId)
     const network = await this.provider.getNetwork()
     const networkId = network.chainId
-    const logs = await this.provider.getLogs({
-      ...filter,
-      fromBlock: getEarliestBlockToCheck(networkId),
-      toBlock: 'latest',
-    })
+    // const logs = await this.provider.getLogs({
+    //   ...filter,
+    //   fromBlock: getEarliestBlockToCheck(networkId),
+    //   toBlock: 'latest',
+    // })
+    const logs = await getBSCLogs(this.provider, filter, getEarliestBlockToCheck(networkId), this.provider.blockNumber)
     const iface = new ethers.utils.Interface(realitioAbi)
-    // @ts-expect-error ignore
     const events = logs.map(log => iface.parseLog(log))
     events.reverse()
     return events
@@ -191,11 +192,12 @@ class RealitioService {
     const filter: any = this.contract.filters.LogClaim(questionId)
     const network = await this.provider.getNetwork()
     const networkId = network.chainId
-    const logs = await this.provider.getLogs({
-      ...filter,
-      fromBlock: getEarliestBlockToCheck(networkId),
-      toBlock: 'latest',
-    })
+    // const logs = await this.provider.getLogs({
+    //   ...filter,
+    //   fromBlock: getEarliestBlockToCheck(networkId),
+    //   toBlock: 'latest',
+    // })
+    const logs = await getBSCLogs(this.provider, filter, getEarliestBlockToCheck(networkId), this.provider.blockNumber)
     return logs.length > 0
   }
 
@@ -284,12 +286,12 @@ class RealitioService {
     const network = await this.provider.getNetwork()
     const networkId = network.chainId
 
-    const logs = await this.provider.getLogs({
-      ...filter,
-      fromBlock: getEarliestBlockToCheck(networkId),
-      toBlock: 'latest',
-    })
-
+    // const logs = await this.provider.getLogs({
+    //   ...filter,
+    //   fromBlock: getEarliestBlockToCheck(networkId),
+    //   toBlock: 'latest',
+    // })
+    const logs = await getBSCLogs(this.provider, filter, getEarliestBlockToCheck(networkId), this.provider.blockNumber)
     if (logs.length === 0) {
       throw new Error(`No LogNewQuestion event found for questionId '${questionId}'`)
     }

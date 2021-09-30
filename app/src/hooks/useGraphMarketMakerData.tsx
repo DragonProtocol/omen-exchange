@@ -188,8 +188,6 @@ const getBondedItems = (outcomes: string[], answers: AnswerItem[]): BondItem[] =
 
 const wrangleResponse = (data: GraphResponseFixedProductMarketMaker, networkId: number): GraphMarketMakerData => {
   const outcomes = data.outcomes ? data.outcomes : getOutcomes(networkId, +data.templateId)
-  // eslint-disable-next-line
-  // debugger
   return {
     address: data.id,
     answerFinalizedTimestamp: data.answerFinalizedTimestamp ? bigNumberify(data.answerFinalizedTimestamp) : null,
@@ -253,7 +251,6 @@ export const useGraphMarketMakerData = (marketMakerAddress: string, networkId: n
       const rangledValue = wrangleResponse(data.fixedProductMarketMaker, networkId)
       setMarketMakerData(rangledValue)
     }
-    // eslint-disable-next-line
   }, [loading])
 
   const fetchData = async () => {

@@ -389,8 +389,6 @@ const MarketPoolLiquidityWrapper: React.FC<Props> = (props: Props) => {
     }
 
     await unlock()
-    // eslint-disable-next-line
-    // debugger
     setAllowanceFinished(true)
   }
 

@@ -134,7 +134,7 @@ export const DateField = (props: Props) => {
         selected={convertUTCToLocal(selected)}
         showDisabledMonthNavigation
         showTimeSelect
-        timeIntervals={networkId === networkIds.RINKEBY ? 5 : 30}
+        timeIntervals={networkId === networkIds.RINKEBY || networkId === networkIds.chapel ? 5 : 30}
       />
     </DateFieldWrapper>
   )

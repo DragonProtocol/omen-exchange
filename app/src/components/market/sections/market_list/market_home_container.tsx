@@ -110,8 +110,6 @@ const wrangleResponse = (data: GraphMarketMakerDataItem[], networkId: number): M
     }
   })
 }
-// eslint-disable-next-line
-// debugger
 const MarketHomeContainer: React.FC = () => {
   const context = useConnectedWeb3Context()
   const cpk = useConnectedCPKContext()

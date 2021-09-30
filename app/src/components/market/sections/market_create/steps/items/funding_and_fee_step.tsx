@@ -346,8 +346,6 @@ const FundingAndFeeStep: React.FC<Props> = (props: Props) => {
   const shouldDisplayMaxButton = collateral.address !== pseudoNativeAssetAddress
 
   const upgradeProxy = async () => {
-    // eslint-disable-next-line
-    // debugger
     if (!cpk) {
       return
     }

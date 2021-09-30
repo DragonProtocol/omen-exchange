@@ -309,7 +309,7 @@ const AskQuestionStep = (props: Props) => {
           setFirst={setFirst}
           startingPoint={startingPoint}
           toggleCategoryButtonFocus={toggleCategoryButtonFocus}
-          tomorrow={tomorrow}
+          tomorrow={today}
           unit={unit}
           upperBound={upperBound}
         />
@@ -340,7 +340,7 @@ const AskQuestionStep = (props: Props) => {
                 formField={
                   <DateField
                     disabled={!!loadedQuestionId}
-                    minDate={tomorrow}
+                    minDate={today}
                     name="resolution"
                     networkId={context.networkId}
                     onChange={handleDateChange}

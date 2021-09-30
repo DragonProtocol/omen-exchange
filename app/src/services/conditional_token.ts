@@ -80,30 +80,30 @@ class ConditionalTokenService {
     return this.contract.balanceOf(ownerAddress, positionId, { blockTag: block })
   }
 
-  getQuestionId = async (conditionId: string): Promise<string> => {
-    const filter: any = this.contract.filters.ConditionPreparation(conditionId)
+  // getQuestionId = async (conditionId: string): Promise<string> => {
+  //   const filter: any = this.contract.filters.ConditionPreparation(conditionId)
 
-    const network = await this.provider.getNetwork()
-    const networkId = network.chainId
+  //   const network = await this.provider.getNetwork()
+  //   const networkId = network.chainId
 
-    const logs = await this.provider.getLogs({
-      ...filter,
-      fromBlock: getEarliestBlockToCheck(networkId),
-      toBlock: 'latest',
-    })
+  //   const logs = await this.provider.getLogs({
+  //     ...filter,
+  //     fromBlock: getEarliestBlockToCheck(networkId),
+  //     toBlock: 'latest',
+  //   })
 
-    if (logs.length === 0) {
-      throw new Error(`No ConditionPreparation event found for conditionId '${conditionId}'`)
-    }
-    if (logs.length > 1) {
-      logger.warn(`There should be only one ConditionPreparation event for conditionId '${conditionId}'`)
-    }
+  //   if (logs.length === 0) {
+  //     throw new Error(`No ConditionPreparation event found for conditionId '${conditionId}'`)
+  //   }
+  //   if (logs.length > 1) {
+  //     logger.warn(`There should be only one ConditionPreparation event for conditionId '${conditionId}'`)
+  //   }
 
-    const iface = new ethers.utils.Interface(conditionalTokensAbi)
-    const event = iface.parseLog(logs[0])
+  //   const iface = new ethers.utils.Interface(conditionalTokensAbi)
+  //   const event = iface.parseLog(logs[0])
 
-    return event.values.questionId
-  }
+  //   return event.values.questionId
+  // }
 
   setApprovalForAll = async (spender: string): Promise<TransactionReceipt> => {
     const transactionObject = await this.contract.setApprovalForAll(spender, true)
