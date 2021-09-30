@@ -71,7 +71,7 @@ const NumericalInput = styled(BigNumberInput)<{ error?: string }>`
     -webkit-appearance: none;
   }
 `
-
+const today = Date.now() - 86400
 interface Props {
   context: ConnectedWeb3Context
   handleChange: (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement> | BigNumberInputReturn) => any
@@ -273,7 +273,6 @@ export const CreateScalarMarket = (props: Props) => {
             formField={
               <DateField
                 disabled={false}
-                minDate={tomorrow}
                 name="resolution"
                 networkId={context.networkId}
                 onChange={handleDateChange}
