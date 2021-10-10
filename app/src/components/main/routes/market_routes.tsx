@@ -62,4 +62,4 @@ const MarketRoutes = (props: RouteComponentProps<RouteParams>) => {
   return <MarketValidation marketMakerAddress={marketMakerAddress} />
 }
 
-export { MarketRoutes }
+export default MarketRoutes

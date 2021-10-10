@@ -1,19 +1,56 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import Loadable from 'react-loadable'
 import { Redirect, Route, HashRouter as Router, Switch } from 'react-router-dom'
 import { useWeb3Context } from 'web3-react'
 
 import { DOCUMENT_TITLE } from '../../common/constants'
-import { ProposalDetailsPage } from '../../pages/guild/proposal_details_page'
-import { MarketHomeContainer } from '../../pages/market_sections/market_home_container'
-import { MarketWizardCreatorContainer } from '../../pages/market_sections/market_wizard_creator_container'
 import { MainScroll, MainWrapper, WrongNetworkMessage } from '../common'
 import { Footer } from '../common/layout/footer'
 import { Header } from '../common/layout/header'
 import { ModalAirdropWrapper } from '../modal'
-import SettingsViewContainer from '../modal/settings/settings_view'
 
-import { MarketRoutes } from './routes/market_routes'
+const SettingsViewContainer = Loadable({
+  loader: () => import('../modal/settings/settings_view'),
+  loading: () => null,
+  render(loaded) {
+    const Component = loaded.SettingsViewContainer
+    return <Component />
+  },
+})
+const MarketHomeContainer = Loadable({
+  loader: () => import('../../pages/market_sections/market_home_container'),
+  loading: () => null,
+  render(loaded) {
+    const Component = loaded.MarketHomeContainer
+
+    return <Component />
+  },
+})
+const MarketRoutes = Loadable({
+  loader: () => import('./routes/market_routes'),
+  loading: () => null,
+  render(loaded, props) {
+    const Component = loaded.default
+    return <Component {...props} />
+  },
+})
+const ProposalDetailsPage = Loadable({
+  loader: () => import('../../pages/guild/proposal_details_page'),
+  loading: () => null,
+  render(loaded) {
+    const Component = loaded.ProposalDetailsPage
+    return <Component />
+  },
+})
+const MarketWizardCreatorContainer = Loadable({
+  loader: () => import('../../pages/market_sections/market_wizard_creator_container'),
+  loading: () => null,
+  render(loaded) {
+    const Component = loaded.MarketWizardCreatorContainer
+    return <Component />
+  },
+})
 
 const RedirectToHome = () => <Redirect to="/" />
 
