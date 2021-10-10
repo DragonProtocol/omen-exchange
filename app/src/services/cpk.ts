@@ -271,7 +271,7 @@ class CPKService {
   getGas = async (txOptions: TxOptions): Promise<void> => {
     const network = await this.provider.getNetwork()
     const networkId = network.chainId
-    if (networkId === networkIds.XDAI || this.isSafeApp) {
+    if (networkId === networkIds.XDAI || networkId === networkIds.chapel || this.isSafeApp) {
       txOptions.gas = defaultGas
     }
   }
@@ -1399,6 +1399,8 @@ class CPKService {
     setTxState,
   }: CPKResolveParams) => {
     try {
+      // eslint-disable-next-line
+      debugger
       const transactions: Transaction[] = []
       const txOptions: TxOptions = {}
       await this.getGas(txOptions)
@@ -1432,6 +1434,8 @@ class CPKService {
 
   submitAnswer = async ({ amount, answer, question, realitio, setTxHash, setTxState }: CPKSubmitAnswerParams) => {
     try {
+      // eslint-disable-next-line
+      debugger
       const txOptions: TxOptions = {}
       if (!this.isSafeApp) {
         txOptions.value = amount

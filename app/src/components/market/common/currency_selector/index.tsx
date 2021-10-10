@@ -120,7 +120,7 @@ export const CurrencySelector: React.FC<Props> = props => {
     <Wrapper {...restProps}>
       <CurrencyDropdown
         currentItem={currentItem}
-        disabled={disabled}
+        disabled={false}
         dropdownPosition={DropdownPosition.center}
         items={currencyDropdownData}
         maxHeight={true}

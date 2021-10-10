@@ -77,6 +77,7 @@ export const MarketWizardCreator = (props: Props) => {
   const [loadMoreButton, setLoadMoreButton] = useState<boolean>(true)
 
   useEffect(() => {
+    // 相当于加了个锁
     let isSubscribed = true
 
     const updateMarketData = async () => {

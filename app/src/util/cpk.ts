@@ -318,8 +318,6 @@ export const createCPK = async (provider: Web3Provider, relay: boolean) => {
     }
   }
   const transactionManager = relay ? new RelayTransactionManager() : new CpkTransactionManager()
-  // eslint-disable-next-line
-  // debugger
   const cpk = new OCPK({ ethLibAdapter: new EthersAdapter({ ethers, signer }), transactionManager, networks })
   await cpk.init()
   return cpk

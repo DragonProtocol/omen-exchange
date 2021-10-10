@@ -274,7 +274,7 @@ export const CreateScalarMarket = (props: Props) => {
             formField={
               <DateField
                 disabled={false}
-                minDate={today}
+                // minDate={today}
                 name="resolution"
                 networkId={context.networkId}
                 onChange={handleDateChange}

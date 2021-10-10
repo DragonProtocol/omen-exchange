@@ -515,8 +515,8 @@ export const ScalarMarketPoolLiquidity = (props: Props) => {
         : setAdditionalSharesType(AdditionalSharesType.long)
     }
   }, [collateral.decimals, outcomeTokenAmounts, amountToFund, amountToRemove, activeTab])
-
   const currencySelectorIsDisabled = relay ? true : currencyFilters.length ? false : true
+  // const currencySelectorIsDisabled = false
   let sellNoteUserEarnings = userEarnings
   let sellNoteDepositedTokens = depositedTokens
   let sellNoteDepositedTokensTotal = depositedTokensTotal

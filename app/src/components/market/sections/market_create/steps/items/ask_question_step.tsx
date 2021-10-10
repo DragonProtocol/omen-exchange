@@ -340,7 +340,7 @@ const AskQuestionStep = (props: Props) => {
                 formField={
                   <DateField
                     disabled={!!loadedQuestionId}
-                    minDate={today}
+                    // minDate={today}
                     name="resolution"
                     networkId={context.networkId}
                     onChange={handleDateChange}

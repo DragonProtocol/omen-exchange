@@ -351,8 +351,6 @@ const MarketPoolLiquidityWrapper: React.FC<Props> = (props: Props) => {
       setTxState(TransactionStep.waitingConfirmation)
       setIsTransactionProcessing(true)
       setIsTransactionModalOpen(true)
-      // eslint-disable-next-line
-      debugger
       await cpk.removeFunding({
         amountToMerge: depositedTokens,
         collateral: marketMakerData.collateral,

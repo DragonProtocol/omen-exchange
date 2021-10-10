@@ -208,7 +208,7 @@ class RealitioService {
     const filter: any = this.contract.filters.LogNewAnswer(null, questionId)
     const network = await this.provider.getNetwork()
     const networkId = network.chainId
-    const logs = await this.getLogsWraper(...filter, getEarliestBlockToCheck(networkId))
+    const logs = await this.getLogsWraper(filter, getEarliestBlockToCheck(networkId))
     // eslint-disable-next-line
     debugger
     const iface = new ethers.utils.Interface(realitioAbi)
@@ -224,7 +224,7 @@ class RealitioService {
     const networkId = network.chainId
     // eslint-disable-next-line
     debugger
-    const logs = await this.getLogsWraper(...filter, getEarliestBlockToCheck(networkId))
+    const logs = await this.getLogsWraper(filter, getEarliestBlockToCheck(networkId))
     return logs.length > 0
   }
 
@@ -313,7 +313,7 @@ class RealitioService {
     const network = await this.provider.getNetwork()
     const networkId = network.chainId
 
-    const logs = await this.getLogsWraper(...filter, getEarliestBlockToCheck(networkId))
+    const logs = await this.getLogsWraper(filter, getEarliestBlockToCheck(networkId))
 
     if (logs.length === 0) {
       throw new Error(`No LogNewQuestion event found for questionId '${questionId}'`)
