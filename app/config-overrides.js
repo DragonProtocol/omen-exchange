@@ -33,5 +33,25 @@ module.exports = (config, env) => {
   config.module.rules[2].oneOf.find(rule => rule.loader === require.resolve('url-loader')).options.name =
     'static/media/[name].[ext]'
   config.optimization.moduleIds = 'hashed'
+  config.optimization.splitChunks = {
+    chunks: 'all',
+    minSize: 20000,
+    minChunks: 1,
+    maxAsyncRequests: 30,
+    maxInitialRequests: 30,
+    enforceSizeThreshold: 50000,
+    cacheGroups: {
+      defaultVendors: {
+        test: /[\\/]node_modules[\\/]/,
+        priority: -10,
+        reuseExistingChunk: true,
+      },
+      default: {
+        minChunks: 2,
+        priority: -20,
+        reuseExistingChunk: true,
+      },
+    },
+  }
   return config
 }
